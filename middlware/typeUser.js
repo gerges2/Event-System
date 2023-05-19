@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, config.TOKEN_KEY);
-    req.user = decoded;// Type and gmail
+    req.user = decoded;// id and gmail
   } catch (err) {
     return res.status(401).send("Invalid Token");
   }

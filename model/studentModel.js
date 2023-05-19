@@ -20,7 +20,6 @@ const StudentTable = new mongoose.Schema(
     password: {
       type: String,
       minLength: [8, 'Password must be more than 6 characters'],
-      maxLength: [16, 'Password is too long'],
     },
     Type :{
       type:Boolean ,

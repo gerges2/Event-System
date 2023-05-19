@@ -3,8 +3,9 @@ const PORT=process.env.PORT
 const url =process.env.URL
 const express= require ("express");
 const path = require('path');
-// const multer  = require('multer')
-//   const userRouter=require("./routes/user.js");
+
+const multer  = require('multer')
+const upload = multer({ dest: 'images/' })
 const speakers=require("./routes/SpeakerRouter.js");
 const Authentication=require("./routes/AuthenticationRouter.js");
 const Student=require("./routes/StudentRouter.js");
@@ -21,13 +22,11 @@ connect();
 app.use(["/speakers"],speakers)
 app.use(["/events"],Event)
 app.use(["/students"],Student)
-app.use(["/login","registerStudent"],Authentication)
+app.use(["/login"],Authentication)
+app.use('/register',Authentication);
 
 
 
-
-const multer  = require('multer')
-const upload = multer({ dest: 'images/' })
 
 app.post('/upload', upload.single('url'), function (req, res) {
    console.log(req.file)
