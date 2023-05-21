@@ -1,14 +1,10 @@
-
 const express= require ("express");
 require("dotenv").config();
 const router=express.Router();
 const helper=require("../healper/speakerHealper")
-const bcrypt= require ("bcrypt");
-const User = require("../model/user");// for database
-const jwt=require("jsonwebtoken");
 const { body, validationResult } = require('express-validator');
 const auth = require("../middlware/auth");
-
+const auth2 = require("../middlware/speackerOrAdmin");
 
 
 router.get('/',(req, res) => {
@@ -36,7 +32,7 @@ router.post('/',[
     }
 });
 
-router.put( '/:id',
+router.put( '/:id',auth2,
 (req, res) => {
   const {id} =req.params
   const data= req.body
@@ -46,18 +42,7 @@ router.delete('/:id', (req, res) => {
   const {id} =req.params
     helper.remove(id,res)
 });
-router.delete('/', auth,(req, res) => {// to test only
-  res.send("delet all speaker");
-});
-
-
-
-
-
-// const auth = require("../middlware/auth");
-
-// router.get("/welcome", auth, (req, res) => {
-  // res.status(200).send("Welcome 🙌 ");
+// router.delete('/', auth,(req, res) => {// to test only
+//   res.send("delet all speaker");
 // });
-
 module.exports = router

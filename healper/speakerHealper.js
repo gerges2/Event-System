@@ -12,7 +12,6 @@ async function getting (res){
   try {
     const respons=  await Speaker.find()    
   // const respons=  await usermodel.find({firstName:"John"})    
-    console.log("done")
     console.log(respons)
     res.status(201).json("come with delete method by id "+respons )
   } catch (e) {
