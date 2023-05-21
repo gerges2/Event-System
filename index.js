@@ -3,7 +3,7 @@ const PORT=process.env.PORT
 const url =process.env.URL
 const express= require ("express");
 const path = require('path');
-
+const cors = require('cors');
 const multer  = require('multer')
 const upload = multer({ dest: 'images/' })
 const speakers=require("./routes/SpeakerRouter.js");
@@ -13,7 +13,7 @@ const Event=require("./routes/EventRouter.js");
 const mongoose= require("mongoose");
 const app= express();
 app.use(express.json())
-
+app.use(cors());
 app.use(express.urlencoded({ extended:false}))
 async function connect(){
     let dat=   await mongoose.connect(url,{useNewUrlParser: true, useUnifiedTopology: true})
@@ -24,7 +24,6 @@ app.use(["/events"],Event)
 app.use(["/students"],Student)
 app.use(["/login"],Authentication)
 app.use('/register',Authentication);
-
 
 
 

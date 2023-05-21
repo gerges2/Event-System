@@ -2,7 +2,7 @@ const express= require ("express");
 const router=express.Router();
 const helper=require("../healper/studentHealber")
 const { body, validationResult } = require('express-validator');
-
+const auth = require("../middlware/auth");
 
 
 require("dotenv").config();
@@ -56,7 +56,7 @@ const errors=validationResult(req);
     }
   
 });
-router.delete('/:id', (req, res) => {
+router.delete('/:id', auth,(req, res) => {
   const {id} =req.params
   helper.remove(id,res)
 });

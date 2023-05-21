@@ -65,6 +65,11 @@ try {
 
 const auth = require("../middlware/auth");
 //auth is sent type and email in request body
+
+
+
+
+
 router.get("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });

@@ -7,7 +7,7 @@ const bcrypt= require ("bcrypt");
 const User = require("../model/user");// for database
 const jwt=require("jsonwebtoken");
 const { body, validationResult } = require('express-validator');
-
+const auth = require("../middlware/auth");
 
 
 
@@ -26,7 +26,7 @@ router.post('/',[
   body('email').isEmail(),
   body('password').isLength({ minLength: 8 }),
   body('fullname').isLength({ min: 8 }),
-],(req, res) => { 
+],auth,(req, res) => { 
 
   if(errors.isEmpty()){
     helper.creation(req.body,res)
@@ -46,7 +46,7 @@ router.delete('/:id', (req, res) => {
   const {id} =req.params
     helper.remove(id,res)
 });
-router.delete('/', (req, res) => {// to test only
+router.delete('/', auth,(req, res) => {// to test only
   res.send("delet all speaker");
 });
 

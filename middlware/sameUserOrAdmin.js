@@ -11,7 +11,9 @@ const verifyToken = (req, res, next) => {
     const decoded = jwt.verify(token, config.TOKEN_KEY);
     req.user = decoded;// Type and gmail
     if (req.user.Type==false ){
-    return res.status(403).send("A token is required for authentication");}
+    
+    // return res.status(403).send("A token is required for authentication");
+}
     
      console.log(req.user);
     
